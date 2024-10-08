@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        /* Basic Options */
+        "lib": ["es2023"],
+        "module": "node16",
+        "target": "es2022",
+        "outDir": "./dist",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+
+        /* Strict Type-Checking Options */
+        "strict": true,
+
+        /* Module Resolution Options */
+        "esModuleInterop": true,
+        "skipDefaultLibCheck": true,
+        "moduleResolution": "node16"
+    },
+    "exclude": [
+        "test/**/*.ts"
+    ]
+}
