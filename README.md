@@ -1,1 +1,1 @@
-# express-api-pg-boilerplate
+# express-extended-api-template
