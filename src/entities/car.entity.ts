@@ -1,5 +1,5 @@
 import {Column, Entity} from "typeorm";
-import {MetadataEntity} from "@nerisma/express-api";
+import {MetadataEntity} from "@nerisma/express-extended";
 
 @Entity()
 export class Car extends MetadataEntity {
@@ -10,7 +10,7 @@ export class Car extends MetadataEntity {
     @Column()
     wheels!: number;
 
-    @Column({type: 'timestamptz'})
+    @Column()
     releaseDate!: Date;
 
 }

@@ -1,58 +1,41 @@
-import express from 'express';
-import {Container, Type} from "@nerisma/di";
-
-// List controllers & entities
-import {Controllers, DataSourceUtils, MetadataEntity} from "@nerisma/express-api";
-import {Car} from "./entities/car.entity";
+import "reflect-metadata";
+import {AuthController, AuthUser, expressExtended} from "@nerisma/express-extended";
 import {CarController} from "./controllers/car.controller";
-
-const entities: Type<MetadataEntity>[] = [Car]
-const controllers: Type<any>[] = [CarController]
+import {Container} from "@nerisma/di";
 
 async function server() {
-    // Setup express
-    const app = express();
-    app.use(express.json());
+    const app = expressExtended();
 
-    // Initialize datasource
-    const dataSource = await DataSourceUtils.getInMemoryPostgresDataSource(entities).initialize();
+    // Load datasource options from config file which is in a sibling directory
+    const dataSource = await app.useDataSource({
+        type: 'sqlite',
+        database: ':memory:',
+        synchronize: true,
+        entities: [__dirname + '/**/*.entity{.ts,.js}', AuthUser],
+    });
 
-    // Inject it
     Container.inject(dataSource, true);
+    Container.resolve(CarController);
 
-    // Bind controllers to express routes
-    Controllers.use(app, controllers);
+    app.useControllers([
+        CarController,
+        AuthController
+    ]);
 
-    // Start the server
-    const server = app.listen(3000, async () => {
+    app.listen(3000, async () => {
         console.log('Server is running on port 3000');
 
-        await client();
+        app.use((req, res, next) => {
+            console.log('Request:', req.method, req.url);
+            next();
+        })
 
-        server.close(() => {
-            console.log('Server closed');
+        fetch ('http://localhost:3000/cars').then(response => response.json()).then(data => {
+            console.log('Cars:', data);
+        }, error => {
+            console.error('Error:', error);
         });
     });
-}
-
-async function client() {
-    // Create a car
-    await fetch('http://localhost:3000/car', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            model: 'Toyota',
-            wheels: 4,
-            releaseDate: new Date(),
-        }),
-    });
-
-    // Consult the car
-    const response = await fetch('http://localhost:3000/car/1');
-    const car = await response.json();
-    console.log(car);
 }
 
 server().catch(console.error);
