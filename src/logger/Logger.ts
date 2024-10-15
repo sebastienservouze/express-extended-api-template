@@ -1,5 +1,4 @@
 import winston, {createLogger, format} from "winston";
-import DailyRotateFile from "winston-daily-rotate-file";
 
 export const logFormat = format.printf(({level, message, timestamp, ...meta}) => {
     let metastr;
@@ -10,7 +9,7 @@ export const logFormat = format.printf(({level, message, timestamp, ...meta}) =>
 });
 
 export const logger = createLogger({
-    level: 'info',
+    level: process.env.LOG_LEVEL || 'info',
     format: format.combine(
         format.timestamp({
             format: 'HH:mm:ss:SSS'
