@@ -1,33 +1,36 @@
 import "reflect-metadata";
 import {expressExtended} from "@nerisma/express-extended";
 import {CarController} from "./controllers/car.controller";
-import {Container} from "../../di";
+import {logger} from "./logger/Logger";
+import {LoggerMiddleware} from "./middleware/Logger.middleware";
+import dotenv from "dotenv";
+import {DatasourceConfig} from "./db/Datasource.config";
+
+dotenv.config();
 
 async function server() {
     const app = expressExtended();
+    app.set('trust proxy', true);
+    app.useLogger(logger);
 
-    app.useLogger(console);
+    // Data source setup
+    const config = DatasourceConfig.getDataSourceConfig();
+    logger.info('Data source config loaded', config);
+    await app.useDataSource(config);
 
-    // Load datasource options from config file which is in a sibling directory
-    await app.useDataSource({
-        type: 'sqlite',
-        database: ':memory:',
-        synchronize: true,
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    });
+    // Log all requests
+    app.use(LoggerMiddleware.logResponse);
+    app.use(LoggerMiddleware.logError);
 
-    app.use((req, res, next) => {
-        console.log('Request:', req.method, req.url);
-        next();
-    });
-
+    // Register controllers
     app.useControllers([
         CarController,
     ]);
 
+    // Start the server
     app.listen(3000, async () => {
-        console.log('Server is running on port 3000');
+        logger.info('Server is running on port 3000');
     });
 }
 
-server().catch(console.error);
+server().catch(logger.error);
