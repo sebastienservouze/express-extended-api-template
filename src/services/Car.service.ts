@@ -1,4 +1,4 @@
-import {Car} from "../entities/car.entity";
+import {Car} from "../entities/Car.entity";
 import {Dependency} from "@nerisma/di";
 import {DataSource} from "typeorm";
 import {CrudService} from "@nerisma/express-extended";

@@ -1,8 +1,8 @@
 import {Dependency} from "../../../di/src/public-api";
 import {DataSource, Repository} from "typeorm";
-import {AuthUser} from "../../../express-api/src/db/auth-user.entity";
-import {AccessTokenPayload, RefreshTokenPayload} from "./token.types";
 import jwt from "jsonwebtoken";
+import {AuthUser} from "../entities/AuthUser.entity";
+import {AccessTokenPayload, RefreshTokenPayload} from "../types/Token.types";
 
 @Dependency()
 export class AuthService {
