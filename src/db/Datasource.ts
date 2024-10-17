@@ -12,7 +12,7 @@ const options: DataSourceOptions = {
     synchronize: false,
     logging: false,
     entities: [__dirname + '../../**/*.entity.{js,ts}'],
-    migrations: [__dirname + '../../**/*.migration.{js,ts}'],
+    migrations: [__dirname + '/migrations/*.{js,ts}'],
 }
 
 console.log(options);
