@@ -1,14 +1,19 @@
 import {DataSource, DataSourceOptions} from "typeorm";
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-export const Datasource = new DataSource({
+const options: DataSourceOptions = {
     type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: 'postgres',
-    database: 'postgres',
+    host: process.env.DB_HOST,
+    port: +process.env.DB_PORT!,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
     synchronize: false,
     logging: false,
     entities: [__dirname + '../../**/*.entity.{js,ts}'],
     migrations: [__dirname + '../../**/*.migration.{js,ts}'],
-})
+}
+
+console.log(options);
+export const Datasource = new DataSource(options);
