@@ -1,7 +1,6 @@
 import {Request, Response} from "express";
-import {Controller, Post} from "../../../express-api/src/web/Controller.decorators";
+import {Controller, Post} from "@nerisma/express-extended";
 import {AuthService} from "../services/Auth.service";
-import {logger} from "../logger/Logger";
 
 @Controller('/auth')
 export class AuthController {

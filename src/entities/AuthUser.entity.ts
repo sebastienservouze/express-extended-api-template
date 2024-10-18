@@ -1,6 +1,7 @@
 import {Column, Entity} from "typeorm";
 import {AuthRole} from "../enums/AuthRole.enum";
-import {MetadataEntity} from "../../../express-api/src/db/MetadataEntity";
+import {MetadataEntity} from "@nerisma/express-extended";
+
 
 @Entity()
 export class AuthUser extends MetadataEntity {

@@ -8,10 +8,9 @@ import {Datasource} from "./db/Datasource";
 
 export async function setupDatasource(app: express.Application) {
     const datasource: DataSource = await app.useDataSource(Datasource.options);
-
-    await datasource.runMigrations();
-
+    
     logger.debug(`Datasource initialized with ${datasource.entityMetadatas.length} entities`);
+
     datasource.entityMetadatas.forEach(entity => logger.debug(`${entity.name}`));
 }
 

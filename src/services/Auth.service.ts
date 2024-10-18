@@ -1,8 +1,8 @@
-import {Dependency} from "../../../di/src/public-api";
 import {DataSource, Repository} from "typeorm";
 import jwt from "jsonwebtoken";
 import {AuthUser} from "../entities/AuthUser.entity";
 import {AccessTokenPayload, RefreshTokenPayload} from "../types/Token.types";
+import {Dependency} from "@nerisma/di";
 
 @Dependency()
 export class AuthService {

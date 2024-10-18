@@ -133,4 +133,4 @@ dist
 .idea
 
 # Db
-*.sqlite
+*.db
