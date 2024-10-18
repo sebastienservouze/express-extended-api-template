@@ -36,8 +36,8 @@ JWT_REFRESH_SECRET=refresh_secret
 LOG_LEVEL=debug
 ```
 4. Set up the database:
-   1. Update the `docker-compose.yml` file with the desired database name, user, and password.
-   2. Start the database: `docker-compose up -d`
-   3. Generate migrations:
-5. Run the migrations: `npm run typeorm migration:generate src/db/migrations/<migration-path>`
-6. Start the server: `npm run start`
+5. Update the `docker-compose.yml` file with the desired database name, user, and password.
+6Start the database: `docker-compose up -d`
+7. Generate migrations: `npm run typeorm migration:generate src/db/migrations/<migration-path>`
+8. Run the migrations: `npm run typeorm migration:run`
+9. Start the server: `npm run start`
