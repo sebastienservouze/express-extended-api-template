@@ -14,9 +14,9 @@ async function server() {
     setupControllers(app);
 
     // Start the server
-    app.listen(3000, async () => {
+    app.listen(process.env.SERVER_PORT ?? 3000, async () => {
         logger.info('==============================');
-        logger.info('Server is running on port 3000');
+        logger.info(`Server is running on port ${process.env.SERVER_PORT ?? 3000}`);
         logger.info('==============================');
     });
 }

@@ -9,7 +9,7 @@ export const logFormat = format.printf(({level, message, timestamp, ...meta}) =>
 });
 
 export const logger = createLogger({
-    level: process.env.LOG_LEVEL || 'info',
+    level: process.env.LOG_LEVEL ?? 'info',
     format: format.combine(
         format.timestamp({
             format: 'HH:mm:ss:SSS'

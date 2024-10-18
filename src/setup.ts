@@ -2,7 +2,6 @@ import express from "express";
 import {DataSource} from "typeorm";
 import {logger} from "./logger/Logger";
 import {LoggerMiddleware} from "./middleware/Logger.middleware";
-import {CarController} from "./controllers/Car.controller";
 import {AuthController} from "./controllers/Auth.controller";
 import {Datasource} from "./db/Datasource";
 
@@ -21,7 +20,6 @@ export function setupMiddlewares(app: express.Application) {
 
 export function setupControllers(app: express.Application) {
     const controllers = [
-        CarController,
         AuthController,
     ];
 

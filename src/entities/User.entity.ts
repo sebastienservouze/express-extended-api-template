@@ -4,7 +4,7 @@ import {MetadataEntity} from "@nerisma/express-extended";
 
 
 @Entity()
-export class AuthUser extends MetadataEntity {
+export class User extends MetadataEntity {
 
     @Column()
     username!: string;

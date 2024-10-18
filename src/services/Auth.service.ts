@@ -1,16 +1,16 @@
 import {DataSource, Repository} from "typeorm";
 import jwt from "jsonwebtoken";
-import {AuthUser} from "../entities/AuthUser.entity";
+import {User} from "../entities/User.entity";
 import {AccessTokenPayload, RefreshTokenPayload} from "../types/Token.types";
 import {Dependency} from "@nerisma/di";
 
 @Dependency()
 export class AuthService {
 
-    private authUserRepository: Repository<AuthUser>
+    private authUserRepository: Repository<User>
 
     constructor(dataSource: DataSource) {
-        this.authUserRepository = dataSource.getRepository(AuthUser);
+        this.authUserRepository = dataSource.getRepository(User);
     }
 
     public async signIn(username: string, password: string): Promise<[string, string]> {
@@ -27,7 +27,7 @@ export class AuthService {
         return [accessToken, refreshToken];
     }
 
-    private getAccessToken(authUser: AuthUser): string {
+    private getAccessToken(authUser: User): string {
         const payload: AccessTokenPayload = {
             sub: authUser.id.toString(),
             username: authUser.username,

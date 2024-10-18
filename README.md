@@ -13,7 +13,7 @@ This is a template for an extended API using Express.js. It includes a basic str
 
 1. Clone the repository
 2. Install the dependencies: `npm install`
-3. Create a `.env` file with the following variables:
+3. (Optional) Create a `.env` file with the following variables:
 ```
 # Environment
 NODE_ENV=dev
@@ -38,6 +38,17 @@ LOG_LEVEL=debug
 4. Set up the database:
 5. Update the `docker-compose.yml` file with the desired database name, user, and password.
 6Start the database: `docker-compose up -d`
-7. Generate migrations: `npm run typeorm migration:generate src/db/migrations/<migration-path>`
-8. Run the migrations: `npm run typeorm migration:run`
+7. Generate migrations: `npm run m:g src/db/migrations/<migration-name>`
+8. Run the migrations: `npm run m:r`
 9. Start the server: `npm run start`
+
+## Scripts
+
+- `npm run dev`: Start the server in development mode with Nodemon
+- `npm run test`: Run the tests
+- `npm run migrations:generate <name>`: Run the tests
+- `npm run m:g <name>`: Shorthand for `npm run migrations:generate <name>`
+- `npm run migration:run`: Run the migrations
+- `npm run m:r`: Shorthand for `npm run migration:run` 
+- `npm run migration:revert`: Revert the last migration
+- `npm run m:re`: Revert the last migration
