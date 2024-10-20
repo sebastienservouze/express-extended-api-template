@@ -31,18 +31,8 @@ jobs:
           key: ${{ secrets.KEY }}
           port: 22
           script: |
-            pwd
-            echo "Deploying to VPS..."
-            echo ls
-            echo "Moving to project directory /home/ubuntu/${{ github.event.repository.name }}"
-            cd /home/ubuntu/${{ github.event.repository.name }}
-            echo "Pulling changes from GitHub"
+            cd /home/${{ secrets.USERNAME }}/${{ github.event.repository.name }}
             git pull
-            echo "Installing dependencies"
             npm i
-            echo "Building project"
             npm run build
-            echo "Restarting pm2 process"
-            pm2 restart ${{ github.event.repository.name }}
-            echo "Deployment complete"
-            
+            sudo pm2 restart ${{ github.event.repository.name }}
