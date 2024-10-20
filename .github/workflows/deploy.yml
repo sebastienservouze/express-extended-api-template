@@ -31,6 +31,7 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           script: |
             echo "Deploying to VPS..."
+            echo ls
             echo "Moving to project directory ${{ github.event.repository.name }}"
             cd /${{ github.event.repository.name }}
             echo "Pulling changes from GitHub"
