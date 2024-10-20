@@ -28,8 +28,10 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSHKEY }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
           script: |
+            echo ${{ secrets.HOST }} ${{ secrets.USERNAME }} ${{ secrets.key }}
             echo "Deploying to VPS..."
             echo ls
             echo "Moving to project directory ${{ github.event.repository.name }}"
