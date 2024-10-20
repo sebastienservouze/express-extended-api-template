@@ -30,6 +30,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSHKEY }}
           script: |
-            cd /{{ github.event.repository.name }}
-            pm2 restart {{ github.event.repository.name }}
+            cd /${{ github.event.repository.name }}
+            pm2 restart ${{ github.event.repository.name }}
             
