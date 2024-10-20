@@ -28,7 +28,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SSHKEY }}
           script: |
             cd /{{ github.event.repository.name }}
             pm2 restart {{ github.event.repository.name }}
