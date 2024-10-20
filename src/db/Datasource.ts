@@ -8,7 +8,7 @@ if (dotenv.config().error) {
 
 let entities;
 if (process.env.NODE_ENV === 'prod') {
-    entities = [__dirname + '../../**/*.entity.js'];
+    entities = [__dirname + '/../../**/*.entity.js'];
 } else {
     entities = [__dirname + '../../**/*.entity.ts'];
 }
