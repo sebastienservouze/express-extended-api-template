@@ -35,4 +35,4 @@ jobs:
             git pull
             npm i
             npm run build
-            sudo pm2 restart ${{ github.event.repository.name }}
+            pm2 restart ${{ github.event.repository.name }}
