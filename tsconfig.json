@@ -17,6 +17,6 @@
         "moduleResolution": "node16"
     },
     "exclude": [
-        "test/**/*.ts"
+        "**/*.spec.ts"
     ]
 }
