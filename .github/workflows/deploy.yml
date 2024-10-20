@@ -8,7 +8,7 @@ on:
     types: [published]
 
 jobs:
-  build:
+  ci-cd:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,6 +30,16 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSHKEY }}
           script: |
+            echo "Deploying to VPS..."
+            echo "Moving to project directory ${{ github.event.repository.name }}"
             cd /${{ github.event.repository.name }}
+            echo "Pulling changes from GitHub"
+            git pull
+            echo "Installing dependencies"
+            npm i
+            echo "Building project"
+            npm run build
+            echo "Restarting pm2 process"
             pm2 restart ${{ github.event.repository.name }}
+            echo "Deployment complete"
             
